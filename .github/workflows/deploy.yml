@@ -33,10 +33,11 @@ jobs:
       - name: Build Angular project
         run: npm run build -- --base-href="/angular-conduit/"
 
-      - name: Upload artifact
+      - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/angular-conduit
+
 
   deploy:
     needs: build
