@@ -1,9 +1,9 @@
-name: Deploy Angular to GitHub Pages
+name: Deploy Angular App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # ou la branche par défaut de ton dépôt
+      - main  # ou ta branche par défaut
 
 permissions:
   contents: read
@@ -12,11 +12,12 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,7 +33,7 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --base-href=/angular-conduit/
 
-      - name: Upload artifact
+      - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v2
         with:
           path: dist/angular-conduit
@@ -43,6 +44,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
