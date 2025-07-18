@@ -32,6 +32,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/angular-conduit/",
               "budgets": [
                 {
                   "type": "initial",
