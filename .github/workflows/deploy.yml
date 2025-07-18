@@ -1,43 +1,37 @@
-name: Deploy Angular app to GitHub Pages
+name: Deploy Angular to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci
 
-      - name: Build Angular project
-        run: npm run build -- --base-href="/angular-conduit/"
+      - name: Build Angular app
+        run: npm run build -- --base-href=/angular-conduit/
 
-      - name: Upload build artifact
+      - name: Upload build artifacts
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/angular-conduit
-
 
   deploy:
     needs: build
