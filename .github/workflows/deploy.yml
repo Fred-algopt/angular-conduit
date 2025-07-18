@@ -3,7 +3,7 @@ name: Deploy Angular app to GitHub Pages
 on:
   push:
     branches:
-      - main  # ou 'master' selon ton repo
+      - main  # ou master selon ton dépôt
 
 permissions:
   contents: read
@@ -33,10 +33,10 @@ jobs:
       - name: Build Angular project
         run: npm run build -- --base-href="/angular-conduit/"
 
-      - name: Upload build artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/angular-conduit  # correspond à ton outputPath
+          path: dist/angular-conduit  # vérifie bien que le dossier de sortie est celui-ci
 
   deploy:
     needs: build
