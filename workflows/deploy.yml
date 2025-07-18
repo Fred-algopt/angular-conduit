@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular project
-        run: npm run build -- --base-href="/p2000-aero-angular-demo/"
+        run: npm run build -- --base-href="/angular-conduit/"
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
