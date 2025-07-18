@@ -4,6 +4,7 @@ import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-layout-footer",
+  standalone: true,
   templateUrl: "./footer.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DatePipe, RouterLink],

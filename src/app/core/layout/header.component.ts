@@ -6,6 +6,7 @@ import { IfAuthenticatedDirective } from "../auth/if-authenticated.directive";
 
 @Component({
   selector: "app-layout-header",
+  standalone: true, 
   templateUrl: "./header.component.html",
   imports: [RouterLinkActive, RouterLink, AsyncPipe, IfAuthenticatedDirective],
 })
