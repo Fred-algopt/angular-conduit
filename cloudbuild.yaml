@@ -33,3 +33,7 @@ images:
 substitutions:
   _REGION: europe-west9
   _REPO: realworld-repo
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
