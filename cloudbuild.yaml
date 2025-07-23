@@ -6,18 +6,20 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/realworld-app']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - run
-      - deploy
-      - realworld-app
-      - --image
-      - gcr.io/$PROJECT_ID/realworld-app
-      - --region
-      - us-central1
-      - --platform
-      - managed
-      - --allow-unauthenticated
+  entrypoint: gcloud
+  args:
+    - run
+    - deploy
+    - realworld-app
+    - --image
+    - gcr.io/$PROJECT_ID/realworld-app
+    - --region
+    - us-central1
+    - --platform
+    - managed
+    - --allow-unauthenticated
+    - --service-account
+    - aero-compte-service@aero-466808.iam.gserviceaccount.com
 
 images:
   - gcr.io/$PROJECT_ID/realworld-app
