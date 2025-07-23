@@ -1,17 +1,10 @@
-# Étape 1 : build Angular
-FROM node:2O.11.1 AS build
-
+FROM node:22.16.0 AS builder
 WORKDIR /app
 COPY . .
+RUN npm ci
+RUN npm run build -- --configuration production
 
-# Installation avec contournement des conflits de dépendances
-RUN npm install --legacy-peer-deps
-
-# Construction du projet Angular
-RUN npm run build --prod
-
-# Étape 2 : image de production
 FROM nginx:alpine
-
-# Copie du build Angular dans NGINX
-COPY --from=build /app/dist/ /usr/share/nginx/html
+COPY --from=builder /app/dist/angular-realworld /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
