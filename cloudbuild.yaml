@@ -3,13 +3,13 @@ steps:
     args:
       - build
       - '-t'
-      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/realworld-app'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/angular-conduit/realworld-app'
       - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - push
-      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/realworld-app'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/angular-conduit/realworld-app'
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
@@ -18,9 +18,9 @@ steps:
       - deploy
       - realworld-app
       - --image
-      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/realworld-app'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/angular-conduit/realworld-app'
       - --region
-      - '${_REGION}'
+      - 'europe-west1'
       - --platform
       - managed
       - --allow-unauthenticated
@@ -28,12 +28,7 @@ steps:
       - 'aero-compte-service@aero-466808.iam.gserviceaccount.com'
 
 images:
-  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/realworld-app'
-
-substitutions:
-  _REGION: europe-west1
-  _REPO: realworld-repo
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/angular-conduit/realworld-app'
 
 options:
   logging: CLOUD_LOGGING_ONLY
-
