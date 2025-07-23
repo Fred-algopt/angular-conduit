@@ -31,5 +31,5 @@ images:
   - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/realworld-app'
 
 substitutions:
-  _REGION: eu-west9
+  _REGION: europe-west9
   _REPO: realworld-repo
