@@ -1,5 +1,5 @@
 # Étape 1 : build Angular
-FROM node:20 AS build
+FROM node:20.11.1 AS build
 
 WORKDIR /app
 COPY . .
