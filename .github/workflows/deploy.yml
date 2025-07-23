@@ -1,40 +1,29 @@
-name: Deploy to Cloud Run
+name: Deploy Angular to GitHub Pages
 
 on:
   push:
     branches:
       - main
 
-env:
-  PROJECT_ID: ton-projet-id
-  REGION: us-central1
-  SERVICE: realworld-app
-
 jobs:
-  deploy:
-    name: Build & Deploy to Cloud Run
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Authenticate with GCP
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+    - name: Use Node.js 22
+      uses: actions/setup-node@v3
+      with:
+        node-version: 22
 
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
+    - name: Install dependencies
+      run: npm ci
 
-      - name: Build and push container
-        run: |
-          gcloud builds submit --tag gcr.io/$PROJECT_ID/$SERVICE
+    - name: Build Angular app
+      run: npm run build -- --prod
 
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy $SERVICE \
-            --image gcr.io/$PROJECT_ID/$SERVICE \
-            --platform managed \
-            --region $REGION \
-            --allow-unauthenticated
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist/angular-conduit
