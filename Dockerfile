@@ -3,6 +3,7 @@ WORKDIR /app
 COPY . .
 RUN npm ci
 RUN npm run build -- --configuration production
+RUN ls -l /app/dist/angular-conduit
 
 FROM nginx:alpine
 COPY --from=builder /app/dist/angular-conduit /usr/share/nginx/html
