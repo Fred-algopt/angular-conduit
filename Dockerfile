@@ -6,5 +6,6 @@ RUN npm run build -- --configuration production
 
 FROM nginx:alpine
 COPY --from=builder /app/dist/angular-conduit /usr/share/nginx/html
-EXPOSE 80
+RUN sed -i 's/listen       80;/listen       8080;/' /etc/nginx/conf.d/default.conf
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
