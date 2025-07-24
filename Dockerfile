@@ -1,12 +1,9 @@
-FROM node:22.16.0 AS builder
-WORKDIR /app
-COPY . .
-RUN npm ci
-RUN npm run build -- --configuration production
-RUN ls -l /app/dist/angular-conduit
-
-FROM nginx:alpine
-COPY --from=builder /app/dist/angular-conduit /usr/share/nginx/html
-RUN sed -i 's/listen *80;/listen 8080;/' /etc/nginx/conf.d/default.conf
+FROM node:22.16.0
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install -g @angular/cli
+RUN npm install
+COPY . ./
+RUN npm run build
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "node", "server.js" ]
