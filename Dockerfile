@@ -6,7 +6,7 @@ RUN npm install && npm run build
 
 # Étape 2 : servir avec nginx
 FROM nginx:alpine
-COPY --from=builder /app/dist/angular-material-site /usr/share/nginx/html
+COPY --from=builder /app/dist/angular-conduit /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 8080
