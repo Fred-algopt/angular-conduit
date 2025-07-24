@@ -7,8 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint --force",
-    "prepare": "husky install"
+    "lint": "ng lint --force"
   },
   "engines": {
     "node": "22.16.0"
